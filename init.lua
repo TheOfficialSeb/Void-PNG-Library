@@ -18,9 +18,9 @@ local chunks = {
 	tRNS=loadstring(HttpService:GetAsync(Git.."Chunks/tRNS.lua"))()
 }
 
-local Deflate = loadstring(HTTPService:GetAsync(Git.."Modules/Deflate.lua"))()
-local Unfilter = loadstring(HTTPService:GetAsync(Git.."Modules/Unfilter.lua"))()
-local BinaryReader = loadstring(HTTPService:GetAsync(Git.."Modules/BinaryReader.lua"))()
+local Deflate = loadstring(HttpService:GetAsync(Git.."Modules/Deflate.lua"))()
+local Unfilter = loadstring(HttpService:GetAsync(Git.."Modules/Unfilter.lua"))()
+local BinaryReader = loadstring(HttpService:GetAsync(Git.."Modules/BinaryReader.lua"))()
 
 local function getBytesPerPixel(colorType)
 	if colorType == 0 or colorType == 3 then
