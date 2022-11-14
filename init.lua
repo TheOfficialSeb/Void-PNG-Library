@@ -1,4 +1,4 @@
-local HTTPService = game:GetService("HttpService")
+local HttpService = game:GetService("HttpService")
 local Git = "https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/"
 
 local PNG = {}
