@@ -1,3 +1,4 @@
+local RunService = game:GetService("RunService")
 local HttpService = game:GetService("HttpService")
 local Git = "https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/"
 
@@ -160,20 +161,20 @@ function PNG.new(buffer)
 	
 	-- Decompress the zlib stream.
 	local success, response = pcall(function ()
-		local result = {}
+		local result = ""
 		local index = 0
-		
+        print("Decompression")
 		Deflate:InflateZlib
 		{
 			Input = BinaryReader.new(file.ZlibStream);
 			
 			Output = function (byte)
+                if index%10000 == 1 then RunService.Stepped:Wait() warn(index) end
 				index = index + 1
-				result[index] = string.char(byte)
+				result = result .. string.char(byte)
 			end
 		}
-		
-		return table.concat(result)
+		return result
 	end)
 	
 	if not success then
