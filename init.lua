@@ -1,25 +1,26 @@
 local HTTPService = game:GetService("HttpService")
+local Git = "https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/"
 
 local PNG = {}
 PNG.__index = PNG
 
 local chunks = {
-	IDAT=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/IDAT.lua"))(),
-	IEND=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/IEND.lua"))(),
-	IHDR=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/IHDR.lua"))(),
-	PLTE=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/PLTE.lua"))(),
-	bKGD=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/bKGD.lua"))(),
-	cHRM=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/cHRM.lua"))(),
-	gAMA=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/gAMA.lua"))(),
-	sRGB=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/sRGB.lua"))(),
-	tEXt=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/tEXt.lua"))(),
-	tIME=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/tIME.lua"))(),
-	tRNS=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/tRNS.lua"))()
+	IDAT=loadstring(HttpService:GetAsync(Git.."Chunks/IDAT.lua"))(),
+	IEND=loadstring(HttpService:GetAsync(Git.."Chunks/IEND.lua"))(),
+	IHDR=loadstring(HttpService:GetAsync(Git.."Chunks/IHDR.lua"))(),
+	PLTE=loadstring(HttpService:GetAsync(Git.."Chunks/PLTE.lua"))(),
+	bKGD=loadstring(HttpService:GetAsync(Git.."Chunks/bKGD.lua"))(),
+	cHRM=loadstring(HttpService:GetAsync(Git.."Chunks/cHRM.lua"))(),
+	gAMA=loadstring(HttpService:GetAsync(Git.."Chunks/gAMA.lua"))(),
+	sRGB=loadstring(HttpService:GetAsync(Git.."Chunks/sRGB.lua"))(),
+	tEXt=loadstring(HttpService:GetAsync(Git.."Chunks/tEXt.lua"))(),
+	tIME=loadstring(HttpService:GetAsync(Git.."Chunks/tIME.lua"))(),
+	tRNS=loadstring(HttpService:GetAsync(Git.."Chunks/tRNS.lua"))()
 }
 
-local Deflate = loadstring(HTTPService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Modules/Deflate.lua"))()
-local Unfilter = loadstring(HTTPService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Modules/Unfilter.lua"))()
-local BinaryReader = loadstring(HTTPService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Modules/BinaryReader.lua"))()
+local Deflate = loadstring(HTTPService:GetAsync(Git.."Modules/Deflate.lua"))()
+local Unfilter = loadstring(HTTPService:GetAsync(Git.."Modules/Unfilter.lua"))()
+local BinaryReader = loadstring(HTTPService:GetAsync(Git.."Modules/BinaryReader.lua"))()
 
 local function getBytesPerPixel(colorType)
 	if colorType == 0 or colorType == 3 then
