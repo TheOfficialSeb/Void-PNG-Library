@@ -456,13 +456,13 @@ function Deflate:Inflate(io)
 	local state = createState(io.Output)
 	local bitStream = getBitStream(io.Input)
 	
-	repeat until parseBlock(bitStream, state)
+	repeat wait() until parseBlock(bitStream, state)
 end
 
 function Deflate:InflateZlib(io)
 	local bitStream = getBitStream(io.Input)
 	local windowSize = parseZlibHeader(bitStream)
-	
+	print("Inflate")
 	self:Inflate
 	{
 		Input = bitStream;
