@@ -1,22 +1,25 @@
----------------------------------------------------------------------------------------------
--- @ CloneTrooper1019, 2019
----------------------------------------------------------------------------------------------
--- [PNG Library]
---
---  A module for opening PNG files into a readable bitmap.
---  This implementation works with most PNG files.
---
----------------------------------------------------------------------------------------------
+local HTTPService = game:GetService("HttpService")
 
 local PNG = {}
 PNG.__index = PNG
 
-local chunks = script.Chunks
-local modules = script.Modules
+local chunks = {
+	IDAT=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/IDAT.lua"))(),
+	IEND=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/IEND.lua"))(),
+	IHDR=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/IHDR.lua"))(),
+	PLTE=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/PLTE.lua"))(),
+	bKGD=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/bKGD.lua"))(),
+	cHRM=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/cHRM.lua"))(),
+	gAMA=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/gAMA.lua"))(),
+	sRGB=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/sRGB.lua"))(),
+	tEXt=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/tEXt.lua"))(),
+	tIME=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/tIME.lua"))(),
+	tRNS=loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Chunks/tRNS.lua"))()
+}
 
-local Deflate = require(modules.Deflate)
-local Unfilter = require(modules.Unfilter)
-local BinaryReader = require(modules.BinaryReader)
+local Deflate = loadstring(HTTPService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Modules/Deflate.lua"))()
+local Unfilter = loadstring(HTTPService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Modules/Unfilter.lua"))()
+local BinaryReader = loadstring(HTTPService:GetAsync("https://raw.githubusercontent.com/TheOfficialSeb/Void-PNG-Library/master/Modules/BinaryReader.lua"))()
 
 local function getBytesPerPixel(colorType)
 	if colorType == 0 or colorType == 3 then
@@ -145,10 +148,9 @@ function PNG.new(buffer)
 			CRC = crc;
 		}
 		
-		local handler = chunks:FindFirstChild(chunkType)
+		local handler = chunks[chunkType]
 		
 		if handler then
-			handler = require(handler)
 			handler(file, chunk)
 		end
 		
